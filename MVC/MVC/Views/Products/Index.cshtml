@@ -1,0 +1,42 @@
+﻿@model List<MVC.Models.Product>
+
+<h2>Product List</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>
+                    @if (product.CategoryIds != null && product.CategoryIds.Any())
+                    {
+                        @string.Join(", ", product.CategoryIds)
+                    }
+
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-danger" style="text-decoration: none; color: white; text-align:right;" asp-route-id="@product.Id">Edit</a> |
+                    <a asp-action="Delete" class="btn btn-danger" style="text-decoration: none; color: white; text-align:right;" asp-route-id="@product.Id">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
